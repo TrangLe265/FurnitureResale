@@ -2,9 +2,14 @@ import {View, Text} from 'react-native';
 //import nav
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getHeaderTitle } from '@react-navigation/elements'; 
 
 //import icons for nav
 import Ionicons from '@expo/vector-icons/Ionicons'; 
+
+//imprort constans
+import {colors} from './styling/colors'; 
+import * as T from './styling/fonts'; 
 
 //import all nav tabs
 import HomeScreen from "./tabs/Home";
@@ -34,12 +39,26 @@ export default function App() {
               iconName = 'person-circle-sharp'; 
             }
 
-            return <Ionicons name={iconName} size= {30} color='blue'/>;
+            const iconColor = focused ? colors.activeBlue : colors.nonActiveBlue; 
+
+            return <Ionicons name={iconName} size= {30} color= {iconColor} />; 
           },
-          tabBarStyle: {height: 100, paddingTop: 10},
+          tabBarStyle: {height: 90, paddingTop: 10},
           tabBarLabel: ({focused}) => (
-            <Text style={{fontSize: 12, color: focused ? 'blue' : 'gray'}}>{route.name}</Text>
-          )
+            <T.smlBodText 
+              style={{
+                fontSize: 12, 
+                color: focused ? colors.activeBlue : colors.nonActiveBlue 
+            }}>
+              {route.name}
+            </T.smlBodText >
+          ), 
+          headerTitle: getHeaderTitle({route, options: {title : route.name}}),
+          headerStyle: {
+            backgroundColor: colors.nonActiveBlue,
+
+          },
+          headerTintColor: colors.white,
         
         })}>
 
