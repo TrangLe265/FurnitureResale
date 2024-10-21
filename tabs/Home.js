@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'; 
+import * as T from '../styling/fonts'; 
 
 export default function HomeScreen(){
     return (
         <View> 
-            <Text>Secondhand Furniture Marketplace</Text>
+            <T.h1>Secondhand Furniture Marketplace</T.h1>
         </View>
     ); 
 }
