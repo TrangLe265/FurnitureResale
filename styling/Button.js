@@ -4,13 +4,17 @@ import { colors } from './colors';
 
 
 
-export const Button = ({styles,children, onPress}) => {
-    const [isPressed, setIsPressed] = useState('false');
+export const Button = ({children, onPress}) => {
+    const [isPressed, setIsPressed] = useState(false);
 
     return (
         <TouchableOpacity
-            style = {[styles.Button,
-                    {backgroundColor: isPressed ? colors.activeBlue : colors.ctaBlue }]} 
+            style = {[
+                        styles.button,
+                        {
+                            backgroundColor: isPressed ? colors.activeBlue : colors.nonActiveBlue
+                        }
+                    ]} 
             onPressIn= {() => setIsPressed(true)} //button changed colors when Pressed
             onPressOut={() => setIsPressed(false)} //reset back once it is no longer pressed on 
             onPress={onPress}  //handle any other later defined functions
@@ -25,18 +29,19 @@ export const Button = ({styles,children, onPress}) => {
 }
 
 const styles = StyleSheet.create({
-    Button: {
+    button: {
         paddingVertical: 10,
         paddingHorizontal: 10,
         borderRadius: 15,
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: colors.ctaBlue, 
+        backgroundColor: colors.nonActiveBlue, 
+        margin: 5, 
     }, 
     text: {
         color: colors.white,
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 15,
+        fontWeight: 'semibold',
     }, 
 
 })

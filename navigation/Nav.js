@@ -35,7 +35,7 @@ import LoginScreen from '../tabs/Login';
 }*/}
 
 //Create a tab bar for all main functions of the app
-function createBottomNav(){
+function CreateBottomNav(){
  
 
   return (
@@ -89,7 +89,7 @@ export default function NavBar() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-        <Stack.Screen name= "Home" component={createBottomNav} />
+        <Stack.Screen name= "Home" component={CreateBottomNav} />
       </Stack.Navigator>
     </NavigationContainer>
     
