@@ -1,14 +1,15 @@
 import {useState} from 'react';
-import {View,TextInput, KeyboardAvoidingView, StyleSheet, Text} from 'react-native'; 
+import {View, KeyboardAvoidingView, StyleSheet, Text, ImageBackground, Image} from 'react-native'; 
 
 import {auth} from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Button } from '../styling/Button';
+import { Button, Input } from '../styling/Components';
 import * as T from '../styling/fonts';
-import colors from '../styling/colors'; 
+import {colors} from '../styling/colors'; 
+import { HorizontalDivider } from '../styling/Divider';
 
 export default function LoginScreen(){
     const [email, setEmail] = useState('');
@@ -40,57 +41,70 @@ export default function LoginScreen(){
     
     return(
         //used KeyboardAvoidingView so that the keyboard does not cover the input field
+        
         <KeyboardAvoidingView
             style={styles.container}
             behavior='padding'
         >
-            <T.h2>Log in or create an account to continue</T.h2>
+            <ImageBackground 
+                source={require('../assets/Flowerpot.jpg')}
+                style= {styles.image}
+                resizeMode="cover"
+            > 
 
-            <View>
-                <TextInput
+            <View style={styles.mainContent}>
+                <View style={{ width:'100%'}}>
+                    <T.hero>FurnitureResale</T.hero>
+                </View>
+                
+                <View style ={{flexDirection:'column',width:'90%', alignContent:'center', margin: 10}}>
+                    <T.h2>Log in or create an account to continue</T.h2>         
+                </View>
+
+            
+                <Input
                     placeholder='Enter your email' 
                     value = {email}
                     onChangeText={text => setEmail(text) }
                     
                 />
-                <TextInput
+                <Input
                     placeholder='Enter your password' 
                     secureTextEntry //so that password is showned as **** s
                     value = {password}
                     onChangeText={text => setPassword(text)}
                 
                 />
-                <Button
-                    onPress={() => {
-                        setLoginType('login')
-                        handleLogin(); 
 
-                    }} 
-                
-                >
-                    <Text>Login</Text>
-                </Button>
-
-                <Button
-                    onPress={() => {
-                        setLoginType('signup');
-                        handleSignup(); 
-                    }}
-                >
-                    <Text>Signup</Text>
-                </Button>
+                <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <Button onPress={() => { handleLogin()}}>
+                            <Text>Login</Text>
+                        </Button>  
+                        <Button onPress={() => {handleSignup()}}>
+                            <Text>Signup</Text>
+                        </Button>
+                </View>
+             
             </View>
-            
-           
+
+            </ImageBackground>
         </KeyboardAvoidingView>
+        
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
+    },
+    image: {
+        flex: 1,
         justifyContent: 'center',
-      },
+    }, 
+    mainContent: {
+        flex: 1,
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        padding: 20,
+    }
 })

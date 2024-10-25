@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native'; 
+import { colors } from './colors';
 
 //each font except 2 parameters, style and children
 //style: so that style can be overriden if needed
@@ -20,31 +21,56 @@ export const h2 = ({style, children}) => {
     return <Text style={[styles.h2, style]}>{children}</Text>
 }
 
+export const hero = ({style, children}) => {
+    return <Text style={[styles.hero, style]}>{children}</Text>
+}
+
+
 
 const styles = StyleSheet.create({
     reg: {
-        fontFamily:'System', 
+        color: colors.brown,
+        fontFamily:'Inter',
         fontSize: 15, 
         fontWeight: '400', 
         lineHeight: 20,
     },
     small: {
-        fontFamily:'System', 
+        fontFamily:'Inter', 
         fontSize: 13, 
-        fontWeight: '300', 
+        fontWeight: '400', 
         lineHeight: 16,
     }, 
     h1: {
-        fontFamily:'System', 
-        fontSize: 18, 
+        fontFamily:'Inter', 
+        fontSize: 22, 
         fontWeight: '500', 
-        lineHeight: 25, 
+        lineHeight: 30, 
+        color: colors.white,
+        textAlign:'center', 
+
     },
     h2: {
-        fontFamily:'System', 
+        fontFamily:'Inter', 
         fontSize: 16, 
-        fontWeight: '500', 
+        fontWeight: '400', 
         lineHeight: 20, 
+        color: colors.white,
+        textAlign:'center', 
+        shadowColor: 'white',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4
+    }, 
+    hero: {
+        fontSize: 40,
+        fontWeight:'200',
+        color: colors.orange, 
+        textAlign: 'center', 
+        shadowColor: 'black',
+        shadowOffset: { width: 2, height: 4 },
+        shadowOpacity: 4,
+        shadowRadius: 6
     }
 })
 

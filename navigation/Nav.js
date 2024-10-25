@@ -54,26 +54,26 @@ function CreateBottomNav(){
             iconName = 'person-circle-sharp'; 
           }
 
-          const iconColor = focused ? colors.activeBlue : colors.nonActiveBlue; 
+          const iconColor = focused ? colors.orange : colors.brown; 
 
           return <Ionicons name={iconName} size= {30} color= {iconColor} />; 
         },
-        tabBarStyle: {height: 90, paddingTop: 10},
+        tabBarStyle: {height: 90, paddingTop: 10, backgroundColor: colors.white},
         tabBarLabel: ({focused}) => (
           <T.smlBodText 
             style={{
               fontSize: 12, 
-              color: focused ? colors.activeBlue : colors.nonActiveBlue 
+              color: focused ? colors.orange : colors.brown 
           }}>
             {route.name}
           </T.smlBodText >
         ), 
         headerTitle: getHeaderTitle({route, options: {title : route.name}}),
         headerStyle: {
-          backgroundColor: colors.nonActiveBlue,
+          backgroundColor: colors.white,
 
         },
-        headerTintColor: colors.white,
+        headerTintColor: colors.orange,
       
       })}>
 
@@ -88,8 +88,8 @@ export default function NavBar() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-        <Stack.Screen name= "Home" component={CreateBottomNav} />
+        <Stack.Screen  options={{headerShown: false}} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{headerShown: false}} name= "Home" component={CreateBottomNav} />
       </Stack.Navigator>
     </NavigationContainer>
     
