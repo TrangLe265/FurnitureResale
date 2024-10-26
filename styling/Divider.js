@@ -18,15 +18,14 @@ export const HorizontalDivider = () => {
 
 const styles  = StyleSheet.create({
     spacing:{
-        height: 50,
+        height: 10,
         width: '100%',
         backgroundColor: 'transparent',
         alignItems: 'center',  
     },
     hDivider: {
-        height: 0.8, 
-        width: '90%',
-        backgroundColor: colors.nonActiveBlue, 
+        height: 1, 
+        backgroundColor: colors.orange, 
         margin: 3, 
         alignItems: 'center'
     },

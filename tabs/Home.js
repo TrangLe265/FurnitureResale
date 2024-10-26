@@ -3,7 +3,7 @@ import * as T from '../styling/fonts';
 
 export default function HomeScreen(){
     return (
-        <View> 
+        <View style={styles.container}> 
             <T.h1>Secondhand Furniture Marketplace</T.h1>
         </View>
     ); 

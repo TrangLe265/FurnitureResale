@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Button, Input } from '../styling/Components';
 import * as T from '../styling/fonts';
 import {colors} from '../styling/colors'; 
-import { HorizontalDivider } from '../styling/Divider';
+
 
 export default function LoginScreen(){
     const [email, setEmail] = useState('');
@@ -65,7 +65,8 @@ export default function LoginScreen(){
                 <Input
                     placeholder='Enter your email' 
                     value = {email}
-                    onChangeText={text => setEmail(text) }
+                    onChangeText={text => setEmail(text)
+                     }
                     
                 />
                 <Input
@@ -100,11 +101,14 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         justifyContent: 'center',
+        
     }, 
     mainContent: {
         flex: 1,
         alignItems: 'center', 
         justifyContent: 'center', 
         padding: 20,
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     }
 })

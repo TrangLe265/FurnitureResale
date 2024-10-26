@@ -13,6 +13,10 @@ export const smlBodText = ({style, children}) => {
     return <Text style={[styles.small, style]}>{children}</Text>
 }
 
+export const actionLink = ({style, children}) => {
+    return <Text style={[styles.actionLink, style]}>{children}</Text>
+}
+
 export const h1 = ({style, children}) => {
     return <Text style={[styles.h1, style]}>{children}</Text>
 }
@@ -41,21 +45,28 @@ const styles = StyleSheet.create({
         fontWeight: '400', 
         lineHeight: 16,
     }, 
+    actionLink: {
+        fontSize: 15, 
+        fontWeight: '500',
+        textDecorationLine:'underline',
+        textDecorationColor: colors.purple, 
+        color: colors.purple,
+
+    },
     h1: {
         fontFamily:'Inter', 
-        fontSize: 22, 
+        fontSize: 18, 
         fontWeight: '500', 
         lineHeight: 30, 
-        color: colors.white,
-        textAlign:'center', 
-
+        color: colors.brown,
+        //textAlign:'center', 
     },
     h2: {
         fontFamily:'Inter', 
         fontSize: 16, 
         fontWeight: '400', 
         lineHeight: 20, 
-        color: colors.white,
+        color: colors.purple,
         textAlign:'center', 
         shadowColor: 'white',
         shadowOffset: { width: 0, height: 4 },
@@ -65,7 +76,7 @@ const styles = StyleSheet.create({
     hero: {
         fontSize: 40,
         fontWeight:'200',
-        color: colors.orange, 
+        color: colors.white, 
         textAlign: 'center', 
         shadowColor: 'black',
         shadowOffset: { width: 2, height: 4 },

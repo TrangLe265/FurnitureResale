@@ -23,16 +23,6 @@ import LoginScreen from '../tabs/Login';
   const Tab = createBottomTabNavigator(); 
   const Stack = createNativeStackNavigator(); 
 
-//Create a stack nav for users to login/out
-{/*function createAuthNav(){
-  
-  return (
-    <Stack.Navigator>
-      <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-      <Stack.Screen name= "Home" component={HomeScreen} />
-    </Stack.Navigator>
-  ); 
-}*/}
 
 //Create a tab bar for all main functions of the app
 function CreateBottomNav(){
