@@ -8,7 +8,7 @@ import { Pressable } from 'react-native';
 import { Button, SmlButton } from '../styling/Components';
 import { colors } from '../styling/colors';
 
-const ImagePickerScreen = () => {
+const ImagePickerScreen = ({onImageSelect}) => {
     const [image, setImage] = useState(null); 
 
 
@@ -41,8 +41,9 @@ const ImagePickerScreen = () => {
         }); 
 
         if (!result.canceled){
-            setImage(result.assets[0].uri); 
-            console.log(result); 
+            const selectedImage = result.assets[0].uri;
+            setImage(selectedImage); 
+            onImageSelect(selectedImage); 
         }
     }; 
 
@@ -67,8 +68,7 @@ const ImagePickerScreen = () => {
                     color = {colors.white}
                 />
             )}
-            
-            
+         
         </View>
 
     );
