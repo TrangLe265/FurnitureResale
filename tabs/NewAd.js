@@ -40,6 +40,7 @@ export default function NewAdScreen(){
 
     useEffect(() => {
         const itemsRef = ref(database, 'items/'); 
+        console.log(database);
         onValue(itemsRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
@@ -96,7 +97,7 @@ export default function NewAdScreen(){
         return newErrors;
     }; 
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         console.log('Attempting to save')
         const errs = validateFields();
 
@@ -104,12 +105,14 @@ export default function NewAdScreen(){
             console.log('No error with inputs');
 
             try {
-                await set(ref(database, 'items/'), { test: 'This is a test' });
-                console.log('Product successfully added');
+                console.log("testing Try")
+            
+                push(ref(database,"/"), { product })
+                console.log('Product successfully added')
             } catch (error) {
-                console.log("Error saving product: ", error.message);
+                console.log("Error saving product: ", error.message)
             }
-        };
+        }
     };
 
 

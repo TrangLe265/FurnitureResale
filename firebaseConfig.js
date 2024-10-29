@@ -7,6 +7,7 @@ import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 const firebaseConfig = {
   apiKey: "AIzaSyAHADNCqJUult3eBzmTWJ-UsEsy2hWYCnA",
   authDomain: "marketplace-9ed64.firebaseapp.com",
+  databaseURL: "https://marketplace-9ed64-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "marketplace-9ed64",
   storageBucket: "marketplace-9ed64.appspot.com",
   messagingSenderId: "965288640600",
