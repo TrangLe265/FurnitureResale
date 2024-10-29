@@ -19,6 +19,8 @@ import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 export default function NewAdScreen(){
     //initialize realtime db and get a ref to service using getDatabsae method
     const database = getDatabase(app);
+    const auth = getAuth(); 
+    const currentUser = auth.currentUser; 
     
     const [product, setProduct] = useState({
         name: '',
@@ -30,36 +32,31 @@ export default function NewAdScreen(){
         dateAdded: '',
         postedBy: '', 
     });
+
     const [items, setItems] = useState([]); 
-
-
-    const auth = getAuth(); 
-    const currentUser = auth.currentUser; 
-
     const [erros, setErrors] = useState({}); //to check if required fields are empoty
+
+    const [resetImage, setResetImage] = useState(false);  
+
+  
 
     useEffect(() => {
         const itemsRef = ref(database, 'items/'); 
-        console.log(database);
+       
         onValue(itemsRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                setItems(Object.values(data)); 
+                setItems(Object.values(data)); //if data is available, convert the data objects to an array of values using Object.values(data)
+                
             } else {
                 setItems([]); 
-            
-            }
+            };  
+            setProduct({
+                'postedBy': currentUser.email, //get the name from the current login user
+                'dateAdded': new Date().toISOString(), //automatically added the date posted
+               });
         })
-    }
-        /*
-        setProduct((prevProduct) => (
-            {
-             ...prevProduct, 
-             postedBy: currentUser.email, //get the name from the current login user
-             dateAdded: new Date().toISOString(), //automatically added the date posted
-            }
-        ));
-        */, [currentUser]); 
+    }, [currentUser]); 
     
     
     const handleInputChange = (field,value) => {
@@ -105,19 +102,24 @@ export default function NewAdScreen(){
             console.log('No error with inputs');
 
             try {
-                console.log("testing Try")
-            
-                push(ref(database,"/"), { product })
-                console.log('Product successfully added')
+                push(ref(database,"/"), { product });
+                console.log('Product successfully added');
+                setProduct({name: '',
+                brand: '',
+                price: '',
+                category: '',
+                description: '', 
+                image: '', 
+                dateAdded: '',
+                postedBy: '', });
+                setResetImage(true); 
+
             } catch (error) {
                 console.log("Error saving product: ", error.message)
             }
         }
     };
-
-
-   
-    
+ 
     return (
         <KeyboardAvoidingView 
             style={styles.container}
@@ -202,11 +204,10 @@ export default function NewAdScreen(){
                     <HorizontalSpacing/>
                     <HorizontalDivider/>
                     
-                    <ImagePickerScreen onImageSelect={handleImage} />
+                    <ImagePickerScreen onImageSelect={handleImage} resetImage={resetImage} />
                     {erros.image && <T.bodyText>{erros.image}</T.bodyText> }
 
                     <Button onPress={() =>{
-                        console.log('Button pressed');
                         handleSubmit(); 
                     }}>
                         <Text>Add product</Text>   

@@ -8,7 +8,7 @@ import { Pressable } from 'react-native';
 import { Button, SmlButton } from '../styling/Components';
 import { colors } from '../styling/colors';
 
-const ImagePickerScreen = ({onImageSelect}) => {
+const ImagePickerScreen = ({onImageSelect, resetImage}) => {
     const [image, setImage] = useState(null); 
 
 
@@ -30,6 +30,12 @@ const ImagePickerScreen = ({onImageSelect}) => {
             }
         }) (); 
     },[]); 
+
+    useEffect(() => {
+        if (resetImage) {
+            setImage(null);  // Clear the image state
+        }
+    }, [resetImage]);
 
 
     const pickImage = async () => {
