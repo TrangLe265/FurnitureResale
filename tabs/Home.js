@@ -1,8 +1,4 @@
 import { useState, useEffect } from 'react';
-import { getDatabase, push, ref, onValue, Database } from 'firebase/database';
-import {getAuth} from 'firebase/auth'; 
-import {app} from '../firebaseConfig'; 
-import * as MailComposer from 'expo-mail-composer';
 
 import { ImageBackground } from 'react-native';
 
@@ -16,12 +12,11 @@ import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 import { colors } from '../styling/colors';
 import { fetchData } from '../hooks/FetchData';
+import {ItemCard} from '../hooks/ItemCard';
 
 export default function HomeScreen(){
-    const database = getDatabase(app);
+   
     const [items, setItems] = useState([]); 
-
-    //console.log("Database is at:", database); 
 
     useEffect(() => {
         fetchData(setItems);
@@ -51,67 +46,11 @@ export default function HomeScreen(){
                     horizontal = {false}
                     data={items}
                     keyExtractor={(item,index) => index.toString()}
-                    renderItem ={ ({item}) => 
-                        (<Card>
-                            <ImageBackground
-                                source= {{uri : item.product.image}}
-                                style= {{height:200,width:'100%'}}
-                                 resizeMode="cover"
-                            />
-                            <HorizontalSpacing/>
-                                <T.h1>{item.product.name}</T.h1>
-                                <HorizontalDivider />
-
-                                <Row>
-                                    <Row style={{flexDirection: 'column'}}>
-                                        <Ionicons name='pricetag-outline' size= {20} color= {colors.orange}/>
-                                        <T.smlBodText>{item.product.category}</T.smlBodText>
-                                    </Row>
-                                    <Row style={{flexDirection: 'column'}}>
-                                        <Ionicons name='cash-outline' size= {20} color= {colors.orange}/>
-                                        <T.smlBodText>{item.product.price} €</T.smlBodText>
-                                    </Row>
-                                    <Row style={{flexDirection: 'column'}}>
-                                        <Ionicons name='time-outline' size= {20} color= {colors.orange}/>
-                                        <T.smlBodText>{item.product.dateAdded}</T.smlBodText>
-                                    </Row>  
-                                </Row>
-                                <HorizontalDivider />
-                                <HorizontalSpacing/>
-                            
-                                <T.h2>About the item:</T.h2>
-                                <T.smlBodText>{item.product.description}</T.smlBodText>
-                        
-                                <Row>
-                                    <T.h2>Brand:</T.h2>
-                                    <T.smlBodText>{item.product.brand}</T.smlBodText>
-                                </Row>
-                                <Row>
-                                    <T.h2>Posted by: </T.h2>
-                                    <T.smlBodText>{item.product.postedBy}</T.smlBodText>
-
-                                </Row>
-                                <HorizontalSpacing/>
-                                <HorizontalDivider />
-                                
-                                <Row>   
-                                    <View></View>
-                                
-                                    <ActionLink
-                                        onPress={() => handleContacting(item.product.postedBy)}
-                                    >
-                                        Contact seller
-                                    </ActionLink>
-                                </Row>
-                                
-                                
-                                
-                        </Card>)}
+                    renderItem ={ ({item}) => (
+                         <ItemCard item={item} />)
+                    }
                 />
-                
-            
-            
-            
+
         </GestureHandlerRootView>
         
         
