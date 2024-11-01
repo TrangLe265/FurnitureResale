@@ -66,6 +66,9 @@ export const ActionLink = ({children,onPress, style}) => {
                     isPressed && styles.pressed,
                     style
             ]}
+            onPressIn={() => setIsPressed(true)}
+            onPressOut={() => setIsPressed(false)}
+            onPress={onPress}
         >
             <Text style={styles.actionLink}>{children}</Text>
         </TouchableOpacity>
@@ -132,9 +135,9 @@ const styles = StyleSheet.create({
         fontSize: 13, 
         fontWeight: '600',
         textDecorationLine:'underline',
-        textDecorationColor: colors.purple, 
-        color: colors.purple,
-
+        textDecorationColor: colors.green, 
+        color: colors.green,
+        marginVertical: 10,
     },
     row: {
         flexDirection: 'row', 

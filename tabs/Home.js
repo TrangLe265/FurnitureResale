@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getDatabase, push, ref, onValue, Database } from 'firebase/database';
 import {getAuth} from 'firebase/auth'; 
 import {app} from '../firebaseConfig'; 
+import * as MailComposer from 'expo-mail-composer';
 
 import { ImageBackground } from 'react-native';
 
@@ -14,6 +15,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 import { colors } from '../styling/colors';
+import { fetchData } from '../hooks/FetchData';
 
 export default function HomeScreen(){
     const database = getDatabase(app);
@@ -22,24 +24,20 @@ export default function HomeScreen(){
     //console.log("Database is at:", database); 
 
     useEffect(() => {
-        const itemsRef = ref(database); 
-    
-        onValue(itemsRef, (snapshot) => {
-            const data = snapshot.val();
-            console.log("check if there is data?: ",data); 
-            if (data) {
-                const itemsArray = Object.values(data); 
-                setItems(itemsArray); 
-                console.log(itemsArray); 
-            }else {
-                setItems([]); 
-            }
-        }); 
-        
-    }, [database]); 
+        fetchData(setItems);
+    }, []); 
 
     console.log("Items length: ",items.length);
 
+    /*  TODO change from email to phone number
+    const handleContacting = async () => {
+        const isSMSAvailable = await SMS.isAvailableAsync();
+        
+        if (isSMSAvailable && )
+         'Hello, I would like to inquire about the product you listed on FurnitureResale!'
+        
+
+    }; */
 
     return (
         <GestureHandlerRootView style={styles.container}>
@@ -96,7 +94,16 @@ export default function HomeScreen(){
                                 <HorizontalSpacing/>
                                 <HorizontalDivider />
                                 
-                                <ActionLink>Contact seller</ActionLink>
+                                <Row>   
+                                    <View></View>
+                                
+                                    <ActionLink
+                                        onPress={() => handleContacting(item.product.postedBy)}
+                                    >
+                                        Contact seller
+                                    </ActionLink>
+                                </Row>
+                                
                                 
                                 
                         </Card>)}
