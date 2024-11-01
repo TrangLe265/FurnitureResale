@@ -58,7 +58,7 @@ export default function LoginScreen(){
                 </View>
                 
                 <View style ={{flexDirection:'column',width:'90%', alignContent:'center', margin: 10}}>
-                    <T.h2>Log in or create an account to continue</T.h2>         
+                    <T.heroSmall>Log in or create an account to continue</T.heroSmall>         
                 </View>
 
             

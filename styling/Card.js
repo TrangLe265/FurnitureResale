@@ -8,13 +8,16 @@ export default function Card({children}) {
 		<View
 			style={{
 				borderColor: colors.brown,
-                borderWidth: 0.5,
-                //backgroundColor: 'white', 
-                //backgroundColor: colors.white,
-				width: '90%',
+                borderWidth: 1,
+				//borderRadius: 5,
+                //backgroundColor: '#FFFEF9', 
+                backgroundColor: colors.white,
+				width: 350, 
+				//maxWidth: '95%',
 				padding: 20,
 				margin: 10, 
-				alignSelf: 'center',
+				alignSelf: 'center', 
+
 			}}>
 			{children}
 		</View>

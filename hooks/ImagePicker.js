@@ -55,11 +55,11 @@ const ImagePickerScreen = ({onImageSelect, resetImage}) => {
 
     return (
         <View style={styles.container}>
-            <SmlButton
+            <Button
                 onPress={pickImage}
             >
                 <Text>Choose image</Text>
-            </SmlButton>
+            </Button>
             {/*If photo is successfully retrieved then display it*/}
             {image ? (
                 <Image 
@@ -71,7 +71,7 @@ const ImagePickerScreen = ({onImageSelect, resetImage}) => {
                 <Ionicons 
                     name="image"
                     size= {200}
-                    color = {colors.white}
+                    color = {colors.green}
                 />
             )}
          

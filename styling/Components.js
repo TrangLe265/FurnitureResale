@@ -31,9 +31,9 @@ export const SmlButton = ({children, onPress, style}) => {
     return (
         <TouchableOpacity
             style = {[
-                        styles.smlButton,
-                        isPressed && styles.pressed,
-                        style
+                    styles.smlButton,
+                    isPressed && styles.pressed,
+                    style
                     ]} 
             onPressIn= {() => setIsPressed(true)} //button changed colors when Pressed
             onPressOut={() => setIsPressed(false)} //reset back once it is no longer pressed on 
@@ -57,7 +57,20 @@ export const Input = ({style,...props}) => {
             {...props} />
     )
 }
+export const ActionLink = ({children,onPress, style}) => {
+    const [isPressed, setIsPressed] = useState(false); 
 
+    return (
+        <TouchableOpacity
+            style= {[
+                    isPressed && styles.pressed,
+                    style
+            ]}
+        >
+            <Text style={styles.actionLink}>{children}</Text>
+        </TouchableOpacity>
+    )
+}
 export const Row = ({children,style}) => {
     return (
         <View style={[styles.row,style]}>
@@ -72,17 +85,18 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'center',
         backgroundColor: colors.white,
-        borderWidth: 0.5,
+        borderWidth: 0.8,
         borderColor: colors.brown,
         margin: 5, 
     }, 
     smlButton: {
-        paddingVertical: 5,
+        paddingVertical: 10,
         paddingHorizontal: 10,
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: colors.green,
-        borderWidth: 0.5,
+        backgroundColor: colors.brown,
+        //borderRadius: 15,
+        //borderWidth: 0.5,
         borderColor: colors.white,
         margin: 5, 
     },
@@ -96,23 +110,31 @@ const styles = StyleSheet.create({
         color: colors.brown,
         fontSize: 15,
         fontWeight: 'semibold',
-        fontStyle: 'italic'
+        //fontStyle: 'italic'
     }, 
     smlBtnText: {
         color: colors.white,
         fontSize: 15,
         fontWeight: 'semibold',
-        fontStyle: 'italic'
+        //fontStyle: 'italic'
     },
     input: {
         minHeight: 40, 
         width: 200, 
         paddingHorizontal: 5, 
         paddingVertical: 10, 
-        borderWidth: 0.2,
-        borderColor: colors.brown, 
+        borderWidth: 0.5,
+        borderColor: colors.purple, 
         backgroundColor: colors.white,
         margin: 3, 
+    },
+    actionLink: {
+        fontSize: 13, 
+        fontWeight: '600',
+        textDecorationLine:'underline',
+        textDecorationColor: colors.purple, 
+        color: colors.purple,
+
     },
     row: {
         flexDirection: 'row', 

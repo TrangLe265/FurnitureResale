@@ -28,7 +28,9 @@ export const h2 = ({style, children}) => {
 export const hero = ({style, children}) => {
     return <Text style={[styles.hero, style]}>{children}</Text>
 }
-
+export const heroSmall = ({style, children}) => {
+    return <Text style={[styles.heroSmall, style]}>{children}</Text>
+}
 
 
 const styles = StyleSheet.create({
@@ -43,11 +45,12 @@ const styles = StyleSheet.create({
         fontFamily:'Inter', 
         fontSize: 13, 
         fontWeight: '400', 
-        lineHeight: 16,
+        lineHeight: 18,
+
     }, 
     actionLink: {
-        fontSize: 15, 
-        fontWeight: '500',
+        fontSize: 13, 
+        fontWeight: '600',
         textDecorationLine:'underline',
         textDecorationColor: colors.purple, 
         color: colors.purple,
@@ -63,11 +66,11 @@ const styles = StyleSheet.create({
     },
     h2: {
         fontFamily:'Inter', 
-        fontSize: 16, 
-        fontWeight: '400', 
+        fontSize: 13, 
+        fontWeight: '600', 
         lineHeight: 20, 
-        color: colors.purple,
-        textAlign:'center', 
+        color: colors.brown,
+        textAlign:'left', 
         shadowColor: 'white',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.2,
@@ -82,6 +85,18 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 2, height: 4 },
         shadowOpacity: 4,
         shadowRadius: 6
+    }, 
+    heroSmall: {
+        fontFamily:'Inter', 
+        fontSize: 16, 
+        fontWeight: '400', 
+        lineHeight: 20, 
+        color: colors.purple,
+        textAlign:'center', 
+        shadowColor: 'white',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4
     }
 })
 

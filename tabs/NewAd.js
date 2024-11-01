@@ -4,7 +4,8 @@ import { Pressable } from 'react-native';
 
 import ImagePickerScreen from '../hooks/ImagePicker';
 //import icons for nav
-import Ionicons from '@expo/vector-icons/Ionicons'; 
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { Picker, PickerIOS } from '@react-native-picker/picker'; 
 
 import {getAuth} from 'firebase/auth'; 
 import {app} from '../firebaseConfig'; 
@@ -19,6 +20,7 @@ import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 export default function NewAdScreen(){
     //initialize realtime db and get a ref to service using getDatabsae method
     const database = getDatabase(app);
+    //console.log("Database is at: ",database)
     const auth = getAuth(); 
     const currentUser = auth.currentUser; 
     
@@ -33,32 +35,18 @@ export default function NewAdScreen(){
         postedBy: '', 
     });
 
-    const [items, setItems] = useState([]); 
     const [erros, setErrors] = useState({}); //to check if required fields are empoty
 
     const [resetImage, setResetImage] = useState(false);  
 
-  
-
-    useEffect(() => {
-        const itemsRef = ref(database, 'items/'); 
-       
-        onValue(itemsRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                setItems(Object.values(data)); //if data is available, convert the data objects to an array of values using Object.values(data)
-                
-            } else {
-                setItems([]); 
-            };  
-            setProduct({
-                'postedBy': currentUser.email, //get the name from the current login user
-                'dateAdded': new Date().toISOString(), //automatically added the date posted
-               });
-        })
-    }, [currentUser]); 
     
-    
+    const handleAdsOwner = () => {
+        setProduct((preProduct) => (
+            {...preProduct, 
+            'postedBy': currentUser.email, 
+            'dateAdded': new Date().toISOString().split('T')[0] }
+        ) )
+    } 
     const handleInputChange = (field,value) => {
         setProduct((preProduct) => (
             {...preProduct, [field]:value,}
@@ -66,6 +54,7 @@ export default function NewAdScreen(){
         setErrors((preErrors) => (
             {...preErrors, [field]: '',}
         ));
+        handleAdsOwner(); 
     };
 
     const handleImage = (imageUri) => {
@@ -80,9 +69,10 @@ export default function NewAdScreen(){
     const validateFields = () => {
         const newErrors = {}
         if(!product.name) newErrors.name = 'Name field is required!'; 
-        if(!product.price) newErrors.price= 'Price field is required'; 
-        if(!product.category) newErrors.category ='Category field is required';
-        if(!product.image) newErrors.image = 'Image field is required'; 
+        if(!product.price) newErrors.price= 'Price field is required!'; 
+        if (Number(product.price) <= 0) newErrors.price='Price field has to be larger than 0'
+        if(!product.category) newErrors.category ='Category field is required!';
+        if(!product.image) newErrors.image = 'Image field is required!'; 
 
         if (Object.keys(newErrors).length > 0){
             Alert.alert(
@@ -95,7 +85,9 @@ export default function NewAdScreen(){
     }; 
 
     const handleSubmit = () => {
+        
         console.log('Attempting to save')
+
         const errs = validateFields();
 
         if (Object.keys(errs).length === 0){
@@ -104,18 +96,20 @@ export default function NewAdScreen(){
             try {
                 push(ref(database,"/"), { product });
                 console.log('Product successfully added');
-                setProduct({name: '',
-                brand: '',
-                price: '',
-                category: '',
-                description: '', 
-                image: '', 
-                dateAdded: '',
-                postedBy: '', });
-                setResetImage(true); 
-
             } catch (error) {
                 console.log("Error saving product: ", error.message)
+            } finally {
+                setProduct({
+                    name: '',
+                    brand: '',
+                    price: '',
+                    category: '',
+                    description: '', 
+                    image: '', 
+                    dateAdded: '',
+                    postedBy: '', 
+                });
+                setResetImage(true); 
             }
         }
     };
@@ -163,8 +157,9 @@ export default function NewAdScreen(){
 
                     <HorizontalDivider/>
                     <HorizontalSpacing/>
-                    <View>
-                        <T.bodyText>Product category: </T.bodyText>
+
+                   <View>
+                        <T.bodyText>Product's category:</T.bodyText>
                         <Row>
                             <SmlButton onPress={() => handleInputChange('category', 'sofas')}>
                                 <Text>Sofa</Text>   
@@ -185,7 +180,8 @@ export default function NewAdScreen(){
                                 <Text>Others</Text>   
                             </SmlButton>
                         </Row>
-                    </View>
+                     </View>
+
                     <HorizontalDivider/>
                     <HorizontalSpacing/>
                     
@@ -194,8 +190,8 @@ export default function NewAdScreen(){
                         <Input  
                             editable
                             multiline
-                            numberOfLines={5}
-                            style={{width: '100%', height: 100}}
+                            numberOfLines={3}
+                            style={{width: 280, height: 100}}
                             value={product.description}
                             onChangeText= {(text) => handleInputChange('description',text)}
 
@@ -212,6 +208,8 @@ export default function NewAdScreen(){
                     }}>
                         <Text>Add product</Text>   
                     </Button>
+
+                    <HorizontalSpacing/>
                 </Card>
           
             </ScrollView>
@@ -223,14 +221,10 @@ export default function NewAdScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white ',
+        backgroundColor: '#F5F5FC',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 30,      
       },
-      scrollView: {
-        flexGrow: 1,
-        alignItems: 'center', 
-        paddingBottom: 30, 
-      }
    
 })
