@@ -26,7 +26,8 @@ const styles  = StyleSheet.create({
     hDivider: {
         height: 1, 
         backgroundColor: colors.orange, 
-        margin: 3, 
+        marginBottom: 3, 
+        marginTop: 10,
         alignItems: 'center'
     },
 })

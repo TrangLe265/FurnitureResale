@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { fetchData } from '../hooks/FetchData';
 import { FlatList, Gesture, GestureHandlerRootView } from 'react-native-gesture-handler';
 import {ItemCard} from '../hooks/ItemCard';
+import Card from '../styling/Card';
+import * as T from '../styling/fonts'; 
 
 export default function YourAdsScreen(){
     
@@ -13,6 +15,9 @@ export default function YourAdsScreen(){
     
     return (
         <GestureHandlerRootView>
+            <Card>
+                <T.h2>Manage your posted ads here</T.h2>
+            </Card>
             <FlatList 
                 horizontal= {false}
                 data={items}

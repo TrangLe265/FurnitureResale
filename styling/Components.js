@@ -135,9 +135,10 @@ const styles = StyleSheet.create({
         fontSize: 13, 
         fontWeight: '600',
         textDecorationLine:'underline',
-        textDecorationColor: colors.green, 
-        color: colors.green,
+        textDecorationColor: colors.brown, 
+        color: colors.brown,
         marginVertical: 10,
+        alignSelf:'center'
     },
     row: {
         flexDirection: 'row', 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Children } from 'react';
 
 import { ImageBackground } from 'react-native';
 
@@ -13,12 +13,13 @@ import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 import { colors } from '../styling/colors';
 import { fetchData } from '../hooks/FetchData';
 
-export function ItemCard({item}){
+
+export function ItemCard({item,children}){
     return(
         <Card>
         <ImageBackground
             source= {{uri : item.product.image}}
-            style= {{height:200,width:'100%'}}
+            style= {{height:300,width:'100%'}}
             resizeMode="cover"
         />
         <HorizontalSpacing/>
@@ -51,8 +52,10 @@ export function ItemCard({item}){
         <Row>
             <T.h2>Posted by: </T.h2>
             <T.smlBodText>{item.product.postedBy}</T.smlBodText>
+            
         </Row>
         <HorizontalSpacing/><HorizontalDivider />
+        {children}
         
     </Card>
     );

@@ -7,9 +7,9 @@ export default function Card({children}) {
 	return (
 		<View
 			style={{
-				borderColor: colors.brown,
-                borderWidth: 1,
-				//borderRadius: 5,
+				//borderColor: colors.brown,
+                //borderWidth: 1,
+				borderRadius: 5,
                 //backgroundColor: '#FFFEF9', 
                 backgroundColor: colors.white,
 				width: 350, 

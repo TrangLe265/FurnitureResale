@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 
 import { ImageBackground } from 'react-native';
+import * as SMS from 'expo-sms';
 
 import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'; 
 import * as T from '../styling/fonts'; 
 import Card from '../styling/Card';
-import { Row, SmlButton, ActionLink } from '../styling/Components';
+import { Row, SmlButton, ActionLink, Button } from '../styling/Components';
 
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -24,15 +25,16 @@ export default function HomeScreen(){
 
     console.log("Items length: ",items.length);
 
-    /*  TODO change from email to phone number
-    const handleContacting = async () => {
+    
+    const handleContacting = async (phoneNumber) => {
         const isSMSAvailable = await SMS.isAvailableAsync();
         
-        if (isSMSAvailable && )
-         'Hello, I would like to inquire about the product you listed on FurnitureResale!'
-        
+        if (isSMSAvailable && phoneNumber.length > 0){
+            const {result} = await SMS.sendSMSAsync(phoneNumber, 'Hello, I would like to inquire about the product you listed on FurnitureResale!')
+        }
+         
 
-    }; */
+    }; 
 
     return (
         <GestureHandlerRootView style={styles.container}>
@@ -47,7 +49,21 @@ export default function HomeScreen(){
                     data={items}
                     keyExtractor={(item,index) => index.toString()}
                     renderItem ={ ({item}) => (
-                         <ItemCard item={item} />)
+                        <ItemCard item={item}>
+                            <Row>
+                                <T.h2>Contact seller</T.h2>
+                                <Pressable>
+                                    <Ionicons
+                                    name='chatbubbles-outline' size= {30} color={colors.orange}
+                                    onPress={() => handleContacting(item.product.phone)}/>
+                                </Pressable>
+
+                            </Row>
+                            
+                            
+                        </ItemCard>
+                        
+                        )
                     }
                 />
 

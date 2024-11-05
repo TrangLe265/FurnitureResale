@@ -13,10 +13,6 @@ export const smlBodText = ({style, children}) => {
     return <Text style={[styles.small, style]}>{children}</Text>
 }
 
-export const actionLink = ({style, children}) => {
-    return <Text style={[styles.actionLink, style]}>{children}</Text>
-}
-
 export const h1 = ({style, children}) => {
     return <Text style={[styles.h1, style]}>{children}</Text>
 }
@@ -48,14 +44,6 @@ const styles = StyleSheet.create({
         lineHeight: 18,
 
     }, 
-    actionLink: {
-        fontSize: 13, 
-        fontWeight: '600',
-        textDecorationLine:'underline',
-        textDecorationColor: colors.purple, 
-        color: colors.purple,
-
-    },
     h1: {
         fontFamily:'Inter', 
         fontSize: 18, 

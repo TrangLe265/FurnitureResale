@@ -33,6 +33,7 @@ export default function NewAdScreen(){
         image: '', 
         dateAdded: '',
         postedBy: '', 
+        phone: '', 
     });
 
     const [erros, setErrors] = useState({}); //to check if required fields are empoty
@@ -108,6 +109,7 @@ export default function NewAdScreen(){
                     image: '', 
                     dateAdded: '',
                     postedBy: '', 
+                    phone: '', 
                 });
                 setResetImage(true); 
             }
@@ -154,6 +156,16 @@ export default function NewAdScreen(){
                             onChangeText= {(text) => handleInputChange('price',text)}
                         />
                     </Row>
+                    <Row>
+                        <T.bodyText>Contact:</T.bodyText>
+                        <Input  
+                            editable
+                            keyboardType={'numeric'}
+                            maxLength={10}
+                            value={product.phone}
+                            onChangeText= {(text) => handleInputChange('phone',text)}
+                        />
+                    </Row>
 
                     <HorizontalDivider/>
                     <HorizontalSpacing/>
@@ -191,7 +203,7 @@ export default function NewAdScreen(){
                             editable
                             multiline
                             numberOfLines={3}
-                            style={{width: 280, height: 100}}
+                            style={{width: 300, height: 100}}
                             value={product.description}
                             onChangeText= {(text) => handleInputChange('description',text)}
 
@@ -221,6 +233,7 @@ export default function NewAdScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 20,
         backgroundColor: '#F5F5FC',
         alignItems: 'center',
         justifyContent: 'center',
