@@ -38,12 +38,15 @@ export default function HomeScreen(){
 
     return (
         <GestureHandlerRootView style={styles.container}>
-            {/*<ImageBackground 
-                source={require('../assets/AppScreemBg.jpg')}
-                style= {styles.image}
-                resizeMode="cover"
-    > */}
-                
+            {(items.length === 0) ? (
+                <Card>
+                    <Row style={{flexDirection: 'column', alignContent: 'center' }}>
+                        <Ionicons name='sad-outline' size={50} color={colors.brown}/>
+                        <T.h2>There is currently no items availabe for sale.</T.h2>
+                    </Row>
+                    
+                </Card>
+            ) : (
                 <FlatList
                     horizontal = {false}
                     data={items}
@@ -66,10 +69,9 @@ export default function HomeScreen(){
                         )
                     }
                 />
-
+            )}
         </GestureHandlerRootView>
-        
-        
+   
     ); 
 }
 
@@ -80,11 +82,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5F5FC',
         /*alignItems: 'center',
         justifyContent: 'center',*/
-      },
-      image: {
-        flex: 1,
-        justifyContent: 'center',
-        
-    }, 
+      }
     
 })

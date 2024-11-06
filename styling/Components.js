@@ -135,10 +135,11 @@ const styles = StyleSheet.create({
         fontSize: 13, 
         fontWeight: '600',
         textDecorationLine:'underline',
-        textDecorationColor: colors.brown, 
-        color: colors.brown,
+        textDecorationColor: colors.orange, 
+        color: colors.orange,
         marginVertical: 10,
-        alignSelf:'center'
+        alignSelf:'center', 
+        //fontStyle: 'italic'
     },
     row: {
         flexDirection: 'row', 
