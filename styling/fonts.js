@@ -48,8 +48,9 @@ const styles = StyleSheet.create({
         fontFamily:'Inter', 
         fontSize: 18, 
         fontWeight: '500', 
-        lineHeight: 30, 
+        lineHeight: 24, 
         color: colors.brown,
+        marginTop: 2,
         //textAlign:'center', 
     },
     h2: {

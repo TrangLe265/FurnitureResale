@@ -91,6 +91,10 @@ const styles = StyleSheet.create({
         borderWidth: 0.8,
         borderColor: colors.brown,
         margin: 5, 
+        shadowColor: 'rgba(0, 0, 0, 0.15)',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,
     }, 
     smlButton: {
         paddingVertical: 10,
@@ -102,6 +106,10 @@ const styles = StyleSheet.create({
         //borderWidth: 0.5,
         borderColor: colors.white,
         margin: 5, 
+        shadowColor: 'rgba(0, 0, 0, 0.15)',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,
     },
     pressed: {
         shadowColor: "#000",

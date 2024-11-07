@@ -40,12 +40,12 @@ function CreateBottomNav(){
             iconName='storefront'; 
           } else if (route.name === "New Announcement"){
             iconName = 'add-circle'; 
-          } else if (route.name === "Own Announcement"){
+          } else if (route.name === "Profile"){
             iconName = 'person-circle-sharp'; 
           }
 
           const iconColor = focused ? colors.orange : colors.brown; 
-
+          
           return <Ionicons name={iconName} size= {30} color= {iconColor} />; 
         },
         tabBarStyle: {height: 90, paddingTop: 10, backgroundColor: colors.white},
@@ -69,7 +69,7 @@ function CreateBottomNav(){
 
       <Tab.Screen name="Marketplace" component={HomeScreen} />
       <Tab.Screen name="New Announcement" component={NewAdScreen} />
-      <Tab.Screen name="Own Announcement" component={YourAdsScreen} />
+      <Tab.Screen name="Profile" component={YourAdsScreen} />
     </Tab.Navigator>
   );
 }

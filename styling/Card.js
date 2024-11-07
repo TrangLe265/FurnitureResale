@@ -1,12 +1,12 @@
 import { View } from "react-native";
 import { colors } from "./colors";
 
-export default function Card({children}) {
+export default function Card({children, style}) {
 	//const { width } = Dimensions.get('window'); 
 
 	return (
 		<View
-			style={{
+			style={[{
 				//borderColor: colors.brown,
                 //borderWidth: 1,
 				borderRadius: 5,
@@ -18,7 +18,7 @@ export default function Card({children}) {
 				margin: 10, 
 				alignSelf: 'center', 
 
-			}}>
+			}, style]}>
 			{children}
 		</View>
 	)

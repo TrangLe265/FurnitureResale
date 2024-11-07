@@ -48,20 +48,43 @@ export default function HomeScreen(){
                     
                 </Card>
             ) : (
+                <View>
+                    <Card style={{paddingVertical: 2}}>
+                        <Row>
+                            <Ionicons name='filter-outline' size={30} color={colors.orange}/>
+                            <T.bodyText>TODO Filter (Maybe)</T.bodyText>
+                        </Row>
+
+                    </Card>
                 <FlatList
                     horizontal = {false}
                     data={items}
                     keyExtractor={(item,index) => index.toString()}
                     renderItem ={ ({item}) => (
                         <ItemCard item={item}>
-                            <Row>
-                                <T.h2>Contact seller</T.h2>
+                            <Row style={{flexDirection:'column', alignContent:'center', paddingTop: 10}}>
+                                
                                 <Pressable>
-                                    <Ionicons
-                                    name='chatbubbles' size= {30} color={colors.green}
-                                    onPress={() => handleContacting(item.product.phone)}/>
+                                    <View style={{
+                                                backgroundColor: colors.orange,
+                                                padding: 10,
+                                                borderRadius: 30,
+                                                shadowColor: '#000',
+                                                shadowOffset: { width: 0, height: 2 },
+                                                shadowOpacity: 0.2,
+                                                shadowRadius: 2,
+                                                elevation: 3,
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
+                                            }}>
+                                        <Ionicons
+                                        name='chatbubbles-outline' size= {25} color={colors.white}
+                                        onPress={() => handleContacting(item.product.phone)}
+                                    />
+                                    </View>
                                 </Pressable>
-
+                                
+             
                             </Row>
                             
                         </ItemCard>
@@ -69,6 +92,7 @@ export default function HomeScreen(){
                         )
                     }
                 />
+                </View>
             )}
         </GestureHandlerRootView>
    
@@ -78,7 +102,7 @@ export default function HomeScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop: 10,
         backgroundColor: '#F5F5FC',
         /*alignItems: 'center',
         justifyContent: 'center',*/
