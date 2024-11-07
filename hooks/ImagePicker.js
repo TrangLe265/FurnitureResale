@@ -58,7 +58,7 @@ const ImagePickerScreen = ({onImageSelect, resetImage}) => {
             <Button
                 onPress={pickImage}
             >
-                <Text>Choose image</Text>
+                Choose image
             </Button>
             {/*If photo is successfully retrieved then display it*/}
             {image ? (

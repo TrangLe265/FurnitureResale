@@ -16,6 +16,7 @@ import Card from '../styling/Card';
 import * as T from '../styling/fonts'; 
 import { colors } from '../styling/colors';
 import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
+import ConfirmationModal from '../hooks/ConfirmationModal';
 
 export default function NewAdScreen(){
     //initialize realtime db and get a ref to service using getDatabsae method
@@ -38,7 +39,9 @@ export default function NewAdScreen(){
 
     const [erros, setErrors] = useState({}); //to check if required fields are empoty
 
-    const [resetImage, setResetImage] = useState(false);  
+    const [resetImage, setResetImage] = useState(false); 
+
+    const [modalVisible,setModalVisible] = useState(null); 
 
     
     const handleAdsOwner = () => {
@@ -85,6 +88,10 @@ export default function NewAdScreen(){
         return newErrors;
     }; 
 
+    const handleConfirmation = () => {
+        setModalVisible(true); 
+    }
+
     const handleSubmit = () => {
         
         console.log('Attempting to save')
@@ -97,8 +104,9 @@ export default function NewAdScreen(){
             try {
                 push(ref(database,"/"), { product });
                 console.log('Product successfully added');
+                Alert.alert('The announcement has been added successfully.');
             } catch (error) {
-                console.log("Error saving product: ", error.message)
+                console.log("Error saving product: ", error.message); 
             } finally {
                 setProduct({
                     name: '',
@@ -112,6 +120,7 @@ export default function NewAdScreen(){
                     phone: '', 
                 });
                 setResetImage(true); 
+                setModalVisible(false); 
             }
         }
     };
@@ -215,14 +224,18 @@ export default function NewAdScreen(){
                     <ImagePickerScreen onImageSelect={handleImage} resetImage={resetImage} />
                     {erros.image && <T.bodyText>{erros.image}</T.bodyText> }
 
-                    <Button onPress={() =>{
-                        handleSubmit(); 
-                    }}>
-                        <Text>Add product</Text>   
+                    <Button onPress={() =>{handleConfirmation()}}>
+                        Add product  
                     </Button>
 
                     <HorizontalSpacing/>
                 </Card>
+                <ConfirmationModal 
+                    visible={modalVisible}
+                    onConfirm= {() => handleSubmit()}
+                    onCancel={() => setModalVisible(false)}
+                    message='The announcement will be added to out MarketPlace. Would you like to proceed?'
+                />
           
             </ScrollView>
             

@@ -15,6 +15,8 @@ import { colors } from '../styling/colors';
 import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 import ConfirmationModal from '../hooks/ConfirmationModal';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
+
 
 export default function YourAdsScreen(){
     
@@ -43,7 +45,10 @@ export default function YourAdsScreen(){
             const itemRef = ref(database,`/${selectedId}`);
             console.log("Item Reference:", itemRef); 
             remove(itemRef)
-            .then(() => {console.log('Item removed');})
+            .then(() => {
+                console.log('Item removed');
+                Alert.alert('The announcement has been deleted successfully.')
+            })
             .catch((error) => {console.error(error)})    
         }
         setModalVisible(false);

@@ -42,6 +42,7 @@ export default function HomeScreen(){
                 <Card>
                     <Row style={{flexDirection: 'column', alignContent: 'center' }}>
                         <Ionicons name='sad-outline' size={50} color={colors.brown}/>
+                        <HorizontalDivider/>
                         <T.h2>There is currently no items availabe for sale.</T.h2>
                     </Row>
                     
@@ -57,12 +58,11 @@ export default function HomeScreen(){
                                 <T.h2>Contact seller</T.h2>
                                 <Pressable>
                                     <Ionicons
-                                    name='chatbubbles-outline' size= {30} color={colors.orange}
+                                    name='chatbubbles' size= {30} color={colors.green}
                                     onPress={() => handleContacting(item.product.phone)}/>
                                 </Pressable>
 
                             </Row>
-                            
                             
                         </ItemCard>
                         
