@@ -61,13 +61,10 @@ export default function HomeScreen(){
                     data={items}
                     keyExtractor={(item,index) => index.toString()}
                     renderItem ={ ({item}) => (
-                        <ItemCard item={item}>
-                            
+                        <ItemCard item={item}>  
                             <IconButton iconName='chatbubbles-outline' onPress={() => handleContacting(item.product.phone)} />
-                            
-                            
+
                         </ItemCard>
-                        
                         )
                     }
                 />

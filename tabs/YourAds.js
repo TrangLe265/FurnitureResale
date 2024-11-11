@@ -36,7 +36,7 @@ export default function YourAdsScreen(){
 
     useEffect(() => {fetchData(setItems)}, []); 
 
-    const handleConfirmation = (itemId) => {
+    const handleDeleteConfirmation = (itemId) => {
         setSelectedId(itemId); 
         setModalVisible(true); 
     }
@@ -57,18 +57,8 @@ export default function YourAdsScreen(){
 
     const handleEdit = (item) => {
         setCurrentItem(item); 
+        console.log('current item is: ',item); 
         setEditModalVisible(true); 
-    }
-
-    const handleUpdate = (updatedItem) => {
-        const itemRef = ref(database, `/${updatedItem.id}`); 
-        update(itemRef, updatedItem)
-        .then( () => {
-            console.log('Item updated'); 
-            Alert.alert('Changes have been made successfully.')
-        })
-        .catch ((error) => console.log(error)); 
-        setEditModalVisible(false); 
     }
 
 
@@ -85,7 +75,7 @@ export default function YourAdsScreen(){
                     renderItem={ ({item}) => 
                             (<ItemCard  item={item}>
                                     <Row>
-                                        <ActionLink onPress={() => handleConfirmation(item.id)}>
+                                        <ActionLink onPress={() => handleDeleteConfirmation(item.id)}>
                                             Delete
                                         </ActionLink>
                                         <ActionLink onPress={() => handleEdit(item)}>
@@ -103,9 +93,7 @@ export default function YourAdsScreen(){
                  <EditModal 
                     visible={editModalVisible}
                     item = {currentItem}
-                    onUpdate= {handleUpdate}
                     onCancel={() => setEditModalVisible(false)}
-                    message={'Would you like to make changes to this announcement?'}
                 />
 
                 </View>
