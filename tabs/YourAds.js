@@ -16,6 +16,7 @@ import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 import ConfirmationModal from '../hooks/ConfirmationModal';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import EditModal from '../hooks/EditModal';
 
 
 export default function YourAdsScreen(){
@@ -29,9 +30,9 @@ export default function YourAdsScreen(){
     const navigation = useNavigation(); 
     
     const [selectedId, setSelectedId] = useState(null); 
-    const [modalVisible,setModalVisible] = useState(null); 
-
-    console.log(currentUser.email); 
+    const [modalVisible,setModalVisible] = useState(false); 
+    const [editModalVisible, setEditModalVisible] = useState(false); 
+    const [currentItem, setCurrentItem] = useState(null); 
 
     useEffect(() => {fetchData(setItems)}, []); 
 
@@ -54,6 +55,22 @@ export default function YourAdsScreen(){
         setModalVisible(false);
         }
 
+    const handleEdit = (item) => {
+        setCurrentItem(item); 
+        setEditModalVisible(true); 
+    }
+
+    const handleUpdate = (updatedItem) => {
+        const itemRef = ref(database, `/${updatedItem.id}`); 
+        update(itemRef, updatedItem)
+        .then( () => {
+            console.log('Item updated'); 
+            Alert.alert('Changes have been made successfully.')
+        })
+        .catch ((error) => console.log(error)); 
+        setEditModalVisible(false); 
+    }
+
 
     const currentUserItems = items.filter(item => item.product.postedBy === currentUser.email); 
   
@@ -67,9 +84,14 @@ export default function YourAdsScreen(){
                     keyExtractor={(item) => item.id}
                     renderItem={ ({item}) => 
                             (<ItemCard  item={item}>
-                                    <SmlButton onPress={() => handleConfirmation(item.id)}>
-                                        Delete
-                                    </SmlButton>
+                                    <Row>
+                                        <ActionLink onPress={() => handleConfirmation(item.id)}>
+                                            Delete
+                                        </ActionLink>
+                                        <ActionLink onPress={() => handleEdit(item)}>
+                                            Edit
+                                        </ActionLink>
+                                    </Row>                                    
                             </ItemCard>)}
                 />
                 <ConfirmationModal 
@@ -77,6 +99,13 @@ export default function YourAdsScreen(){
                     onConfirm= {() => handleDelete(selectedId)}
                     onCancel={() => setModalVisible(false)}
                     message='The announcement will be removed from our MarketPlace. Would you like to proceed?'
+                />
+                 <EditModal 
+                    visible={editModalVisible}
+                    item = {currentItem}
+                    onUpdate= {handleUpdate}
+                    onCancel={() => setEditModalVisible(false)}
+                    message={'Would you like to make changes to this announcement?'}
                 />
 
                 </View>

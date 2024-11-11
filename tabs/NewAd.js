@@ -11,7 +11,7 @@ import {getAuth} from 'firebase/auth';
 import {app} from '../firebaseConfig'; 
 import { getDatabase, ref, push, set, onValue } from 'firebase/database';
 
-import { Button, SmlButton ,Input, Row } from '../styling/Components';
+import { Button, SmlButton ,Input, Row, Tag, ActionLink } from '../styling/Components';
 import Card from '../styling/Card'; 
 import * as T from '../styling/fonts'; 
 import { colors } from '../styling/colors';
@@ -21,7 +21,6 @@ import ConfirmationModal from '../hooks/ConfirmationModal';
 export default function NewAdScreen(){
     //initialize realtime db and get a ref to service using getDatabsae method
     const database = getDatabase(app);
-    //console.log("Database is at: ",database)
     const auth = getAuth(); 
     const currentUser = auth.currentUser; 
     
@@ -38,27 +37,19 @@ export default function NewAdScreen(){
     });
 
     const [erros, setErrors] = useState({}); //to check if required fields are empoty
-
     const [resetImage, setResetImage] = useState(false); 
-
     const [modalVisible,setModalVisible] = useState(null); 
 
-    
-    const handleAdsOwner = () => {
-        setProduct((preProduct) => (
-            {...preProduct, 
-            'postedBy': currentUser.email, 
-            'dateAdded': new Date().toISOString().split('T')[0] }
-        ) )
-    } 
     const handleInputChange = (field,value) => {
         setProduct((preProduct) => (
-            {...preProduct, [field]:value,}
-        ));
+            {...preProduct, 
+            [field]:value,
+            'postedBy': currentUser.email,
+            'dateAdded': new Date().toISOString().split('T')[0]
+        }));
         setErrors((preErrors) => (
             {...preErrors, [field]: '',}
         ));
-        handleAdsOwner(); 
     };
 
     const handleImage = (imageUri) => {
@@ -94,8 +85,6 @@ export default function NewAdScreen(){
 
     const handleSubmit = () => {
         
-        console.log('Attempting to save')
-
         const errs = validateFields();
 
         if (Object.keys(errs).length === 0){
@@ -103,7 +92,6 @@ export default function NewAdScreen(){
 
             try {
                 push(ref(database,"/"), { product });
-                console.log('Product successfully added');
                 Alert.alert('The announcement has been added successfully.');
             } catch (error) {
                 console.log("Error saving product: ", error.message); 
@@ -124,12 +112,18 @@ export default function NewAdScreen(){
             }
         }
     };
+
+    const categories = [
+        { label: 'Sofa', value: 'sofas' },
+        { label: 'Storage', value: 'storages' },
+        { label: 'Tables', value: 'tables' },
+        { label: 'Beds', value: 'beds' },
+        { label: 'Chairs & Armchairs', value: 'chair & armchairs' },
+        { label: 'Others', value: 'others' },
+    ];
  
     return (
-        <KeyboardAvoidingView 
-            style={styles.container}
-            behavior='padding'
-        >
+        <KeyboardAvoidingView style={styles.container}behavior='padding'>
             <ScrollView>
                 <Card>
                     <T.h1>Create a new annoucement</T.h1>
@@ -180,26 +174,22 @@ export default function NewAdScreen(){
                     <HorizontalSpacing/>
 
                    <View>
-                        <T.bodyText>Product's category:</T.bodyText>
                         <Row>
-                            <SmlButton onPress={() => handleInputChange('category', 'sofas')}>
-                                <Text>Sofa</Text>   
-                            </SmlButton>
-                            <SmlButton onPress={() => handleInputChange('category', 'storages')}>
-                                <Text>Storage</Text>   
-                            </SmlButton>
-                            <SmlButton onPress={() => handleInputChange('category', 'tables')}>
-                                <Text>Tables</Text>   
-                            </SmlButton>
-                            <SmlButton onPress={() => handleInputChange('category', 'beds')}>
-                                <Text>Beds</Text>   
-                            </SmlButton>
-                            <SmlButton onPress={() => handleInputChange('category', 'chair & armchairs')}>
-                                <Text>Chairs & Armcharis</Text>   
-                            </SmlButton>
-                            <SmlButton onPress={() => handleInputChange('category', 'others')}>
-                                <Text>Others</Text>   
-                            </SmlButton>
+                            <T.bodyText>Product's category:</T.bodyText>
+                            <ActionLink>
+                                {product.category ? product.category:'choose a category'}
+                            </ActionLink>
+                        </Row>
+                        
+                        <Row>
+                            {categories.map((category) => (
+                                <Tag
+                                    key={category.value}
+                                    onPress={() => handleInputChange('category', category.value)}
+                                >
+                                    {category.label}
+                                </Tag>
+                            ))}
                         </Row>
                      </View>
 
@@ -215,7 +205,6 @@ export default function NewAdScreen(){
                             style={{width: 300, height: 100}}
                             value={product.description}
                             onChangeText= {(text) => handleInputChange('description',text)}
-
                         />
                     </View>
                     <HorizontalSpacing/>

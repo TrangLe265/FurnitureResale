@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Text, StyleSheet, TouchableOpacity, TextInput, View} from 'react-native'; 
+import {Text, StyleSheet, TouchableOpacity, TextInput, View, Pressable} from 'react-native'; 
 import { colors } from './colors';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export const Button = ({children, onPress, style}) => {
     const [isPressed, setIsPressed] = useState(false);
@@ -46,6 +47,47 @@ export const SmlButton = ({children, onPress, style}) => {
         </TouchableOpacity>
 
     ); 
+}
+
+export const Tag = ({children, onPress, style}) => {
+    const [isPressed, setIsPressed] = useState(false);
+
+    return (
+        <TouchableOpacity
+            style = {[
+                    styles.tag,
+                    isPressed && styles.pressed,
+                    style
+                    ]} 
+            onPressIn= {() => setIsPressed(true)} 
+            onPressOut={() => setIsPressed(false)} 
+            onPress={onPress}
+        >
+            <View style={styles.iconContainer}>
+                <Ionicons name="pricetag-outline" size={15} color={colors.white} />
+            </View>
+            <Text style={styles.smlBtnText}>
+                {children}
+            </Text>
+            
+        </TouchableOpacity>
+
+    ); 
+}
+
+export const IconButton = ({iconName, size, color, onPress, style}) => {
+    const [isPressed, setIsPressed] = useState(false);
+
+    return (
+        <Pressable
+            onPressIn= {() => setIsPressed(true)} 
+            onPressOut={() => setIsPressed(false)} 
+            onPress={onPress}
+            style= {[styles.iconButton, isPressed && styles.pressed, style]}
+        >
+          <Ionicons name={iconName} size={25} color={colors.white} />   
+        </Pressable>
+    )
 }
 
 export const Input = ({style,...props}) => {
@@ -129,6 +171,38 @@ const styles = StyleSheet.create({
         fontWeight: 'semibold',
         //fontStyle: 'italic'
     },
+    tag: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        backgroundColor: colors.green,
+        borderRadius: 15,
+        margin: 5,
+        shadowColor: 'rgba(0, 0, 0, 0.15)',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,
+    }, 
+    iconContainer: {
+        marginRight: 6,
+    },
+    iconButton: {
+        backgroundColor: colors.orange,
+        width: 50,
+        height: 50, 
+        paddingVertical: 10, 
+        marginTop: 10, 
+        borderRadius: 30, 
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2}, 
+        shadowOpacity: 0.2,
+        shadowRadius: 2, 
+        elevation: 3,
+        alignItems: 'center',
+        justifyContent: 'center', 
+        alignSelf: 'center', 
+    }, 
     input: {
         minHeight: 40, 
         width: 200, 
@@ -140,14 +214,14 @@ const styles = StyleSheet.create({
         margin: 3, 
     },
     actionLink: {
-        fontSize: 13, 
+        fontSize: 15, 
         fontWeight: '600',
         textDecorationLine:'underline',
         textDecorationColor: colors.orange, 
         color: colors.orange,
         marginVertical: 10,
         alignSelf:'center', 
-        //fontStyle: 'italic'
+        fontStyle: 'italic'
     },
     row: {
         flexDirection: 'row', 

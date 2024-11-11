@@ -6,7 +6,7 @@ import * as SMS from 'expo-sms';
 import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'; 
 import * as T from '../styling/fonts'; 
 import Card from '../styling/Card';
-import { Row, SmlButton, ActionLink, Button } from '../styling/Components';
+import { Row, SmlButton, ActionLink, Button, IconButton } from '../styling/Components';
 
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -62,30 +62,9 @@ export default function HomeScreen(){
                     keyExtractor={(item,index) => index.toString()}
                     renderItem ={ ({item}) => (
                         <ItemCard item={item}>
-                            <Row style={{flexDirection:'column', alignContent:'center', paddingTop: 10}}>
-                                
-                                <Pressable>
-                                    <View style={{
-                                                backgroundColor: colors.orange,
-                                                padding: 10,
-                                                borderRadius: 30,
-                                                shadowColor: '#000',
-                                                shadowOffset: { width: 0, height: 2 },
-                                                shadowOpacity: 0.2,
-                                                shadowRadius: 2,
-                                                elevation: 3,
-                                                alignItems: 'center',
-                                                justifyContent: 'center'
-                                            }}>
-                                        <Ionicons
-                                        name='chatbubbles-outline' size= {25} color={colors.white}
-                                        onPress={() => handleContacting(item.product.phone)}
-                                    />
-                                    </View>
-                                </Pressable>
-                                
-             
-                            </Row>
+                            
+                            <IconButton iconName='chatbubbles-outline' onPress={() => handleContacting(item.product.phone)} />
+                            
                             
                         </ItemCard>
                         
