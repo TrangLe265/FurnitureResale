@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View, ScrollView, Alert} from 'react-native'; 
+import { KeyboardAvoidingView, StyleSheet, Text, View, ScrollView, Alert,ImageBackground, Image} from 'react-native'; 
 import { Pressable } from 'react-native';
 
 import ImagePickerScreen from '../hooks/ImagePicker';
@@ -96,6 +96,7 @@ export default function NewAdScreen(){
             } catch (error) {
                 console.log("Error saving product: ", error.message); 
             } finally {
+                setResetImage(true); 
                 setProduct({
                     name: '',
                     brand: '',
@@ -107,7 +108,6 @@ export default function NewAdScreen(){
                     postedBy: '', 
                     phone: '', 
                 });
-                setResetImage(true); 
                 setModalVisible(false); 
             }
         }
@@ -124,6 +124,11 @@ export default function NewAdScreen(){
  
     return (
         <KeyboardAvoidingView style={styles.container}behavior='padding'>
+            <ImageBackground 
+                source={require('../assets/bcg_image.png')}
+                style= {styles.image}
+                resizeMode="cover"
+            > 
             <ScrollView>
                 <Card>
                     <T.h1>Create a new annoucement</T.h1>
@@ -210,7 +215,7 @@ export default function NewAdScreen(){
                     <HorizontalSpacing/>
                     <HorizontalDivider/>
                     
-                    <ImagePickerScreen onImageSelect={handleImage} resetImage={setResetImage} />
+                    <ImagePickerScreen onImageSelect={handleImage} resetImage={resetImage} />
                     {erros.image && <T.bodyText>{erros.image}</T.bodyText> }
 
                     <Button onPress={() =>{handleConfirmation()}}>
@@ -227,6 +232,7 @@ export default function NewAdScreen(){
                 />
           
             </ScrollView>
+            </ImageBackground>
             
         </KeyboardAvoidingView>
     ); 
@@ -235,11 +241,15 @@ export default function NewAdScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
-        backgroundColor: '#F5F5FC',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingBottom: 30,      
+        //paddingTop: 20,
+        //backgroundColor: '#F5F5FC',
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        //paddingBottom: 30,      
       },
+      image: {
+        flex: 1,
+        justifyContent: 'center',      
+    },
    
 })

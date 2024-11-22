@@ -60,42 +60,40 @@ export default function YourAdsScreen(){
         console.log('current item is: ',item); 
         setEditModalVisible(true); 
     }
-
-
+    
     const currentUserItems = items.filter(item => item.product.postedBy === currentUser.email); 
   
     return (
         <GestureHandlerRootView>
             {(currentUserItems.length > 0) ? (
                 <View>
-               <FlatList 
-                    horizontal= {false}
-                    data={currentUserItems}
-                    keyExtractor={(item) => item.id}
-                    renderItem={ ({item}) => 
-                            (<ItemCard  item={item}>
-                                    <Row>
-                                        <ActionLink onPress={() => handleDeleteConfirmation(item.id)}>
-                                            Delete
-                                        </ActionLink>
-                                        <ActionLink onPress={() => handleEdit(item)}>
-                                            Edit
-                                        </ActionLink>
-                                    </Row>                                    
-                            </ItemCard>)}
-                />
-                <ConfirmationModal 
-                    visible={modalVisible}
-                    onConfirm= {() => handleDelete(selectedId)}
-                    onCancel={() => setModalVisible(false)}
-                    message='The announcement will be removed from our MarketPlace. Would you like to proceed?'
-                />
-                 <EditModal 
-                    visible={editModalVisible}
-                    item = {currentItem}
-                    onCancel={() => setEditModalVisible(false)}
-                />
-
+                    <FlatList 
+                        horizontal= {false}
+                        data={currentUserItems}
+                        keyExtractor={(item) => item.id}
+                        renderItem={ ({item}) => 
+                                (<ItemCard  item={item}>
+                                        <Row>
+                                            <ActionLink onPress={() => handleDeleteConfirmation(item.id)}>
+                                                Delete
+                                            </ActionLink>
+                                            <ActionLink onPress={() => handleEdit(item)}>
+                                                Edit
+                                            </ActionLink>
+                                        </Row>                                    
+                                </ItemCard>)}
+                    />
+                    <ConfirmationModal 
+                        visible={modalVisible}
+                        onConfirm= {() => handleDelete(selectedId)}
+                        onCancel={() => setModalVisible(false)}
+                        message='The announcement will be removed from our MarketPlace. Would you like to proceed?'
+                    />
+                    <EditModal 
+                        visible={editModalVisible}
+                        item = {currentItem}
+                        onCancel={() => setEditModalVisible(false)}
+                    />
                 </View>
                 
                     ) : (

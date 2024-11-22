@@ -1,5 +1,3 @@
-import {View, Text} from 'react-native'; 
-//import nav
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getHeaderTitle } from '@react-navigation/elements'; 
@@ -40,7 +38,7 @@ function CreateBottomNav(){
             iconName='storefront'; 
           } else if (route.name === "New Announcement"){
             iconName = 'add-circle'; 
-          } else if (route.name === "Profile"){
+          } else if (route.name === "Own Announcement"){
             iconName = 'person-circle-sharp'; 
           }
 
@@ -61,7 +59,6 @@ function CreateBottomNav(){
         headerTitle: getHeaderTitle({route, options: {title : route.name}}),
         headerStyle: {
           backgroundColor: colors.white,
-
         },
         headerTintColor: colors.orange,
       
@@ -69,7 +66,7 @@ function CreateBottomNav(){
 
       <Tab.Screen name="Marketplace" component={HomeScreen} />
       <Tab.Screen name="New Announcement" component={NewAdScreen} />
-      <Tab.Screen name="Profile" component={YourAdsScreen} />
+      <Tab.Screen name="Own Announcement" component={YourAdsScreen} />
     </Tab.Navigator>
   );
 }
