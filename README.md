@@ -1,6 +1,6 @@
 # Furniture Resale App 🛋️
 ##  ✨ Overview
-Furniture Resale App is a mobile application that provides an online platform for users to sell and buy used furniture. The app is designed to make furniture reselling quick and seamless, with user-friendly features such as photo upload, product management, and direct buyer-seller communication. Developed as part of a coursework assignment, it provides a strong foundation with ample opportunities for future enhancements.
+The Furniture Resale App is a mobile platform designed for users to buy and sell pre-owned furniture. It features a user-friendly interface with functionalities like photo uploads, product management, and direct communication between buyers and sellers. Built using React Native and custom UI components, the app was developed as part of a coursework project, offering a solid foundation with significant potential for future improvements.
 
 ##  ✨ Features
 * User Authentication: Secure login and registration with Firebase Authentication'
