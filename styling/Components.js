@@ -95,7 +95,6 @@ export const Input = ({style,...props}) => {
         <TextInput 
             style= {[styles.input, style]}
             placeholderTextColor={colors.purple}
-            textAlign='center'
             {...props} />
     )
 }
@@ -129,9 +128,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: colors.white,
+        backgroundColor: colors.purple,
         borderWidth: 0.8,
-        borderColor: colors.brown,
+        borderColor: colors.purple,
         margin: 5, 
         shadowColor: 'rgba(0, 0, 0, 0.15)',
         shadowOffset: { width: 0, height: 4 },
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
     }, 
     text: {
-        color: colors.brown,
+        color: colors.white,
         fontSize: 15,
         fontWeight: 'semibold',
         //fontStyle: 'italic'

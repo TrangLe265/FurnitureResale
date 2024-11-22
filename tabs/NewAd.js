@@ -210,7 +210,7 @@ export default function NewAdScreen(){
                     <HorizontalSpacing/>
                     <HorizontalDivider/>
                     
-                    <ImagePickerScreen onImageSelect={handleImage} resetImage={resetImage} />
+                    <ImagePickerScreen onImageSelect={handleImage} resetImage={setResetImage} />
                     {erros.image && <T.bodyText>{erros.image}</T.bodyText> }
 
                     <Button onPress={() =>{handleConfirmation()}}>

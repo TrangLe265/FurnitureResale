@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import { ImageBackground } from 'react-native';
 import * as SMS from 'expo-sms';
 
 import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'; 
@@ -18,6 +17,23 @@ import {ItemCard} from '../hooks/ItemCard';
 export default function HomeScreen(){
    
     const [items, setItems] = useState([]); 
+    const [sortOrder,setSortOrder] = useState('ascending') //Price sorted ascending by default
+
+    const getSortedItems = () => {
+        //create a shallow copy of items list for sorting 
+        //array.sort(compareFunction)
+        return [...items].sort((a,b) => {
+            const priceA = parseFloat(a.product.price);
+            const priceB = parseFloat(b.product.price); 
+            return sortOrder === 'ascending' ? priceA - priceB : priceB - priceA
+        })
+    }
+
+    const toggleSort = () => {
+        setSortOrder((prev) => (
+            (prev === 'ascending') ? 'descending' : 'ascending'
+        )); 
+    }
 
     useEffect(() => {
         fetchData(setItems);
@@ -45,29 +61,30 @@ export default function HomeScreen(){
                         <HorizontalDivider/>
                         <T.h2>There is currently no items availabe for sale.</T.h2>
                     </Row>
-                    
                 </Card>
             ) : (
                 <View>
                     <Card style={{paddingVertical: 2}}>
                         <Row>
                             <Ionicons name='filter-outline' size={30} color={colors.orange}/>
-                            <T.bodyText>TODO Filter (Maybe)</T.bodyText>
+                            <T.h2>Sort by price: {sortOrder === 'ascending' ? 'Ascending' : 'Descending'}</T.h2> 
+                            <Pressable onPress={toggleSort}>
+                                <Ionicons name={sortOrder === 'ascending' ? 'arrow-up-circle' : 'arrow-down-circle'} size={30} color={colors.orange} />
+                            </Pressable>
+
                         </Row>
-
                     </Card>
-                <FlatList
-                    horizontal = {false}
-                    data={items}
-                    keyExtractor={(item,index) => index.toString()}
-                    renderItem ={ ({item}) => (
-                        <ItemCard item={item}>  
-                            <IconButton iconName='chatbubbles-outline' onPress={() => handleContacting(item.product.phone)} />
-
-                        </ItemCard>
-                        )
-                    }
-                />
+                    <FlatList
+                        horizontal = {false}
+                        data={getSortedItems()}
+                        keyExtractor={(item,index) => index.toString()}
+                        renderItem ={ ({item}) => (
+                            <ItemCard item={item}>  
+                                <IconButton iconName='chatbubbles-outline' onPress={() => handleContacting(item.product.phone)} />
+                            </ItemCard>
+                            )
+                        }
+                    />
                 </View>
             )}
         </GestureHandlerRootView>
@@ -80,6 +97,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 10,
         backgroundColor: '#F5F5FC',
+        paddingBottom: 20, 
         /*alignItems: 'center',
         justifyContent: 'center',*/
       }
