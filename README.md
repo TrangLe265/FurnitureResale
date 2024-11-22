@@ -11,10 +11,10 @@ Furniture Resale App is a mobile application that provides an online platform fo
 
 <img width="280" alt="Screenshot 2024-11-21 at 16 42 07" src="https://github.com/user-attachments/assets/c240457f-9f84-46f6-9329-0b4850d201a6">
 <img width="280" alt="Screenshot 2024-11-21" src="https://github.com/user-attachments/assets/4046699e-351c-498c-bcf6-c73e69fb0b15">
-<img width="280" alt="Screenshot 2024-11-21" src="https://github.com/user-attachments/assets/dc8b5f23-9cb6-4a9c-9a96-fc85def3a206">
 
+<img width="280" alt="Screenshot 2024-11-21" src="https://github.com/user-attachments/assets/dc8b5f23-9cb6-4a9c-9a96-fc85def3a206">
 <img width="280" alt="Screenshot 2024-11-21" src="https://github.com/user-attachments/assets/50575932-d1c5-47bf-bc72-bfa95d5aca06">
-<img width="280" alt="Screenshot 2024-11-21" src="https://github.com/user-attachments/assets/d35466cf-c1f2-4c83-ab39-048a5df230a2">
+
 
 
 ##  ✨ Technology Stacks
