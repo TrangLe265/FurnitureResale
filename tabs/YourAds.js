@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native'; 
+import { StyleSheet, View } from 'react-native'; 
+import { Alert } from 'react-native';
 
-import { fetchData } from '../hooks/FetchData';
-import { FlatList, Gesture, GestureHandlerRootView } from 'react-native-gesture-handler';
-import {ItemCard} from '../hooks/ItemCard';
-import Card from '../styling/Card';
-import {ActionLink, Button, Row, SmlButton} from '../styling/Components';
-import * as T from '../styling/fonts'; 
+import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
+import Ionicons from '@expo/vector-icons/Ionicons'; 
+import { useNavigation } from '@react-navigation/native';
+
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, child, push, update, remove } from "firebase/database";
 import {app} from '../firebaseConfig'; 
-import Ionicons from '@expo/vector-icons/Ionicons'; 
+
+import Card from '../styling/Card';
+import {ActionLink, Row} from '../styling/Components';
+import * as T from '../styling/fonts'; 
+
 import { colors } from '../styling/colors';
-import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
+import { HorizontalSpacing } from '../styling/Divider';
 import ConfirmationModal from '../hooks/ConfirmationModal';
-import { useNavigation } from '@react-navigation/native';
-import { Alert } from 'react-native';
+
+import {ItemCard} from '../hooks/ItemCard';
 import EditModal from '../hooks/EditModal';
+import { fetchData } from '../hooks/FetchData';
 
 
 export default function YourAdsScreen(){
@@ -111,7 +115,6 @@ export default function YourAdsScreen(){
                     )
                 }
                 
-            
         </GestureHandlerRootView> 
     ); 
 }

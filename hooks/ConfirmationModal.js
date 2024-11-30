@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, View, Text, StyleSheet, Pressable } from 'react-native';
+import { Modal, View, StyleSheet } from 'react-native';
+
 import { colors } from '../styling/colors';
 import * as T from '../styling/fonts'; 
 import { HorizontalDivider } from '../styling/Divider';

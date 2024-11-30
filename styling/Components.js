@@ -9,9 +9,10 @@ export const Button = ({children, onPress, style}) => {
     return (
         <TouchableOpacity
             style = {[
+                        //include all the pre-defined styles of the component in an array 
                         styles.button,
-                        isPressed && styles.pressed,
-                        style
+                        isPressed && styles.pressed, //react when user pressed
+                        style //any other future styles 
                     ]} 
             onPressIn= {() => setIsPressed(true)} //button changed colors when Pressed
             onPressOut={() => setIsPressed(false)} //reset back once it is no longer pressed on 
@@ -49,6 +50,7 @@ export const SmlButton = ({children, onPress, style}) => {
     ); 
 }
 
+//category tag
 export const Tag = ({children, onPress, style}) => {
     const [isPressed, setIsPressed] = useState(false);
 
@@ -98,6 +100,7 @@ export const Input = ({style,...props}) => {
             {...props} />
     )
 }
+
 export const ActionLink = ({children,onPress, style}) => {
     const [isPressed, setIsPressed] = useState(false); 
 

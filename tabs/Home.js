@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'; 
+import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import * as SMS from 'expo-sms';
+import Ionicons from '@expo/vector-icons/Ionicons'; 
 
-import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'; 
 import * as T from '../styling/fonts'; 
 import Card from '../styling/Card';
-import { Row, SmlButton, ActionLink, Button, IconButton } from '../styling/Components';
-
-import Ionicons from '@expo/vector-icons/Ionicons'; 
-import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
-import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
+import { Row, IconButton } from '../styling/Components';
+import { HorizontalDivider } from '../styling/Divider';
 import { colors } from '../styling/colors';
 import { fetchData } from '../hooks/FetchData';
 import {ItemCard} from '../hooks/ItemCard';
@@ -30,6 +29,7 @@ export default function HomeScreen(){
     }
 
     const toggleSort = () => {
+        //prev = the previous state of sortOrder 
         setSortOrder((prev) => (
             (prev === 'ascending') ? 'descending' : 'ascending'
         )); 
@@ -55,6 +55,7 @@ export default function HomeScreen(){
     return (
         <GestureHandlerRootView style={styles.container}>
             {(items.length === 0) ? (
+                //if there is no item for sales
                 <Card>
                     <Row style={{flexDirection: 'column', alignContent: 'center' }}>
                         <Ionicons name='sad-outline' size={50} color={colors.brown}/>
@@ -63,11 +64,14 @@ export default function HomeScreen(){
                     </Row>
                 </Card>
             ) : (
+                //if there are items for sales
                 <View>
                     <Card style={{paddingVertical: 2}}>
                         <Row>
                             <Ionicons name='filter-outline' size={30} color={colors.orange}/>
-                            <T.h2>Sort by price: {sortOrder === 'ascending' ? 'Ascending' : 'Descending'}</T.h2> 
+                            <T.h2>
+                                Sort by price: {sortOrder === 'ascending' ? 'Ascending' : 'Descending'}
+                            </T.h2> 
                             <Pressable onPress={toggleSort}>
                                 <Ionicons name={sortOrder === 'ascending' ? 'arrow-up-circle' : 'arrow-down-circle'} size={30} color={colors.orange} />
                             </Pressable>
@@ -80,7 +84,10 @@ export default function HomeScreen(){
                         keyExtractor={(item,index) => index.toString()}
                         renderItem ={ ({item}) => (
                             <ItemCard item={item}>  
-                                <IconButton iconName='chatbubbles-outline' onPress={() => handleContacting(item.product.phone)} />
+                                <IconButton 
+                                    iconName='chatbubbles-outline' 
+                                    onPress={() => handleContacting(item.product.phone)}
+                                />
                             </ItemCard>
                             )
                         }

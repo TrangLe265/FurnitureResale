@@ -1,14 +1,13 @@
 import {useState} from 'react';
-import {View, KeyboardAvoidingView, StyleSheet, Text, ImageBackground, Image} from 'react-native'; 
+import {View, KeyboardAvoidingView, StyleSheet, Text, ImageBackground} from 'react-native'; 
+import { useNavigation } from '@react-navigation/native';
 
 import {auth} from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-import { useNavigation } from '@react-navigation/native';
-
 import { Button, Input } from '../styling/Components';
 import * as T from '../styling/fonts';
-import {colors} from '../styling/colors'; 
+
 
 
 export default function LoginScreen(){
@@ -87,7 +86,6 @@ export default function LoginScreen(){
                 </View>
              
             </View>
-
             </ImageBackground>
         </KeyboardAvoidingView>
         
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'center', 
         padding: 20,
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFillObject, //overlay for the image background
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     }
 })

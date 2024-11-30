@@ -1,24 +1,17 @@
-import { useState, useEffect, Children } from 'react';
+import { ImageBackground} from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { ImageBackground } from 'react-native';
-
-import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native'; 
-import * as T from '../styling/fonts'; 
+import * as T from '../styling/fonts';
 import Card from '../styling/Card';
-import { Row, SmlButton, ActionLink } from '../styling/Components';
-
-import Ionicons from '@expo/vector-icons/Ionicons'; 
-import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Row} from '../styling/Components';
 import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
 import { colors } from '../styling/colors';
-import { fetchData } from '../hooks/FetchData';
-
 
 export function ItemCard({item,children}){
     return(
         <Card>
             <ImageBackground
-                source= {{uri : item.product.image}}
+                source= {{uri : item.product.image}} //double {{}} because this is an object literals
                 style= {{height:300,width:'100%'}}
                 resizeMode="cover"
             />
@@ -51,11 +44,12 @@ export function ItemCard({item,children}){
             </Row>
             <Row>
                 <T.h2>Posted by: </T.h2>
-                <T.smlBodText>{item.product.postedBy}</T.smlBodText>
-                
+                <T.smlBodText>{item.product.postedBy}</T.smlBodText>   
             </Row>
+
             <HorizontalSpacing/><HorizontalDivider />
-            {children}  
+            {children} 
+            {/* any children inside of the Card component will inherit its styles and props*/}
         </Card>
     );
     

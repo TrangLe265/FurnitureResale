@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { Modal, View, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+import { Modal, View, Text, StyleSheet } from 'react-native';
 import { colors } from '../styling/colors';
+
 import * as T from '../styling/fonts'; 
-import { HorizontalDivider } from '../styling/Divider';
 import { Row, SmlButton, Input } from '../styling/Components';
-import NewAdScreen from '../tabs/NewAd';
+
 import { getDatabase, ref, update } from 'firebase/database';
 import {app} from '../firebaseConfig';
-import { Alert } from 'react-native';
 
 export default EditModal = ({ visible, onCancel, onConfirm, item }) => {
     console.log(item); 

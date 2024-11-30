@@ -1,22 +1,18 @@
 import React, { useState, useEffect} from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View, ScrollView, Alert,ImageBackground, Image} from 'react-native'; 
-import { Pressable } from 'react-native';
-
-import ImagePickerScreen from '../hooks/ImagePicker';
-//import icons for nav
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Picker, PickerIOS } from '@react-native-picker/picker'; 
+import { KeyboardAvoidingView, StyleSheet, View, ScrollView, Alert,ImageBackground} from 'react-native'; 
 
 import {getAuth} from 'firebase/auth'; 
 import {app} from '../firebaseConfig'; 
 import { getDatabase, ref, push, set, onValue } from 'firebase/database';
 
-import { Button, SmlButton ,Input, Row, Tag, ActionLink } from '../styling/Components';
+import { Button,Input, Row, Tag, ActionLink } from '../styling/Components';
 import Card from '../styling/Card'; 
 import * as T from '../styling/fonts'; 
-import { colors } from '../styling/colors';
+
 import { HorizontalDivider, HorizontalSpacing } from '../styling/Divider';
+
 import ConfirmationModal from '../hooks/ConfirmationModal';
+import ImagePickerScreen from '../hooks/ImagePicker';
 
 export default function NewAdScreen(){
     //initialize realtime db and get a ref to service using getDatabsae method
@@ -42,7 +38,7 @@ export default function NewAdScreen(){
 
     const handleInputChange = (field,value) => {
         setProduct((preProduct) => (
-            {...preProduct, 
+            {...preProduct, //keep the previous state of the product
             [field]:value,
             'postedBy': currentUser.email,
             'dateAdded': new Date().toISOString().split('T')[0]
@@ -62,13 +58,14 @@ export default function NewAdScreen(){
     };
 
     const validateFields = () => {
-        const newErrors = {}
-        if(!product.name) newErrors.name = 'Name field is required!'; 
-        if(!product.price) newErrors.price= 'Price field is required!'; 
+        const newErrors = {} //initialize an object that will store possible erros in the form key : value pair
+        if (!product.name) newErrors.name = 'Name field is required!'; //assign the value 'Name field is required!' to the field of name
+        if (!product.price) newErrors.price= 'Price field is required!'; 
         if (Number(product.price) <= 0) newErrors.price='Price field has to be larger than 0'
-        if(!product.category) newErrors.category ='Category field is required!';
-        if(!product.image) newErrors.image = 'Image field is required!'; 
+        if (!product.category) newErrors.category ='Category field is required!';
+        if (!product.image) newErrors.image = 'Image field is required!'; 
 
+        //Object.keys(ObjectName) returns the number of keys available
         if (Object.keys(newErrors).length > 0){
             Alert.alert(
                 "Validation error",

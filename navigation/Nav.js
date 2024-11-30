@@ -3,14 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getHeaderTitle } from '@react-navigation/elements'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-//import icons for nav
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 
-//imprort constans
 import {colors} from '../styling/colors'; 
 import * as T from '../styling/fonts'; 
 
-//import all tabs
 import HomeScreen from "../tabs/Home";
 import NewAdScreen from "../tabs/NewAd";
 import YourAdsScreen from "../tabs/YourAds";
@@ -52,11 +49,12 @@ function CreateBottomNav(){
             style={{
               fontSize: 12, 
               color: focused ? colors.orange : colors.brown 
-          }}>
+            }}
+          >
             {route.name}
           </T.smlBodText >
         ), 
-        headerTitle: getHeaderTitle({route, options: {title : route.name}}),
+        headerTitle: getHeaderTitle({ route, options: {title : route.name} }),
         headerStyle: {
           backgroundColor: colors.white,
         },

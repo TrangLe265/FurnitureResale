@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, Platform, StyleSheet, Text } from 'react-native';
+
 import * as ImagePicker from 'expo-image-picker';
 import Ionicons from '@expo/vector-icons/Ionicons'; 
-import { Pressable } from 'react-native';
 
-
-import { Button, SmlButton } from '../styling/Components';
+import { Button} from '../styling/Components';
 import { colors } from '../styling/colors';
 
 const ImagePickerScreen = ({onImageSelect, resetImage}) => {
     const [image, setImage] = useState(null); 
-
 
     useEffect(() => {
         (async () => {
