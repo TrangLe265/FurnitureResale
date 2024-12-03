@@ -39,8 +39,6 @@ export default function HomeScreen(){
         fetchData(setItems);
     }, []); 
 
-    console.log("Items length: ",items.length);
-
     
     const handleContacting = async (phoneNumber) => {
         const isSMSAvailable = await SMS.isAvailableAsync();

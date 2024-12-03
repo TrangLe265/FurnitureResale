@@ -25,7 +25,7 @@ export default EditModal = ({ visible, onCancel, onConfirm, item }) => {
     });
 
     useEffect(() => {
-        if (item) {
+        if (item) { //even if a field is missing, the useEffect will still go through
             setProduct({
                 name: item.product.name || '',
                 brand: item.product.brand || '',
@@ -45,20 +45,22 @@ export default EditModal = ({ visible, onCancel, onConfirm, item }) => {
         setProduct((prevProduct) => {
             const updatedProduct = { ...prevProduct, [field]: value };
             console.log(updatedProduct);
+            console.log(value);
             return updatedProduct;
         });
     };  
 
     const handleEditConfirmation = () => {
         const database = getDatabase(app);
-        const itemRef = ref(database, `/${item.id}/product`);
+        const itemRef = ref(database, `/${item.id}/product`); //how the firebase link is configured
 
-        // Simplified data to avoid depth/cycle issues
+        // destrcuting object
         const { name, brand, price, category, description } = product;
-        const updatedData = { name, brand, price, category, description };
+        const updatedData = { brand, price, description }; //only change the value updated
 
         update(itemRef, updatedData)
             .then(() => {
+                console.log('Updating new data: ',updatedData); 
                 Alert.alert('Changes have been made successfully.');
             })
             .catch((error) => console.error(error));
@@ -96,6 +98,15 @@ export default EditModal = ({ visible, onCancel, onConfirm, item }) => {
                 placeholder={`Price: ${product.price}`} 
                 value={product.price} 
                 onChangeText={(number) => handleInputChange('price',number)} 
+              />
+              <T.h2>Brand:</T.h2>
+              <Input
+                editable
+                maxLength={10} 
+                style={{width: 300}}
+                placeholder={`Brand: ${product.brand}`} 
+                value={product.brand} 
+                onChangeText={(text) => handleInputChange('brand',text)} 
               />
             </>
           ) : (
